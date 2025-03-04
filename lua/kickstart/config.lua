@@ -106,6 +106,7 @@ vim.opt.number = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
+vim.opt.mousemoveevent = true
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -202,3 +203,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+vim.keymap.set('n', '<C-s>', function()
+  if vim.bo.modifiable then
+    vim.cmd 'w'
+    print '💾 Archivo guardado!'
+  else
+    print '❌ No se puede guardar este archivo!'
+  end
+end, { desc = 'Guardar archivo', noremap = true, silent = true })
