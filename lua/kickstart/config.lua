@@ -215,3 +215,5 @@ vim.keymap.set('n', '<C-s>', function()
     print '❌ No se puede guardar este archivo!'
   end
 end, { desc = 'Guardar archivo', noremap = true, silent = true })
+
+vim.keymap.set('n', '<C-q>', '<cmd>q<CR>', { desc = 'Close', noremap = true, silent = true })
