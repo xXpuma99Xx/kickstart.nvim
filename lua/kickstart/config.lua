@@ -207,7 +207,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.keymap.set('n', '<C-s>', function()
+vim.keymap.set({ 'n', 'i' }, '<C-s>', function()
   if vim.bo.modifiable then
     vim.cmd 'w'
     print '💾 Archivo guardado!'
@@ -217,3 +217,32 @@ vim.keymap.set('n', '<C-s>', function()
 end, { desc = 'Guardar archivo', noremap = true, silent = true })
 
 vim.keymap.set('n', '<C-q>', '<cmd>q<CR>', { desc = 'Close', noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('i', '<C-h>', '<C-w>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('c', '<C-h>', '<C-w>', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<C-z>', 'u', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-z>', '<C-o>u', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-z>', 'u', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<C-S-z>', '<C-r>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<C-S-z>', '<C-o><C-r>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<C-S-z>', '<C-r>', { noremap = true, silent = true })
+
+local function extend_linewise_visual_selection()
+  -- Si estamos en modo visual, extender la selección a la siguiente línea
+  if vim.fn.mode() == 'V' then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('j', true, true, true), 'x', false)
+  else
+    -- Si estamos en modo normal, entrar en modo Visual Línea
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('V', true, true, true), 'n', false)
+  end
+end
+
+vim.keymap.set('n', '<leader><C-l>', extend_linewise_visual_selection, { noremap = true, silent = true })
+vim.keymap.set('v', '<C-l>', extend_linewise_visual_selection, { noremap = true, silent = true })
+
+vim.opt.commentstring = '// %s'
+
+vim.api.nvim_set_keymap('i', '<C-BS>', '<C-w>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('c', '<C-BS>', '<C-w>', { noremap = true, silent = true })
