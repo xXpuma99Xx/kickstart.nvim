@@ -135,14 +135,13 @@ return {
       --     enable = true,
       --     auto_open = true,
       --   },
-      --   update_focused_file = {
-      --     enable = false,
-      --     update_root = {
-      --       enable = false,
-      --       ignore_list = {},
-      --     },
-      --     exclude = false,
-      --   },
+
+      update_focused_file = {
+        enable = true,
+        update_root = true, -- { enable = false, ignore_list = {} }
+        -- exclude = false,
+      },
+
       --   system_open = {
       --     cmd = '',
       --     args = {},

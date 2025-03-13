@@ -8,4 +8,6 @@ return {
   require 'custom.plugins.bufferline',
 
   require 'custom.plugins.nvim-tree',
+
+  require 'custom.plugins.rainbow-delimiters',
 }
