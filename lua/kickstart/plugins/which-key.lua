@@ -49,7 +49,7 @@ return {
       { '<leader>s', group = '[S]earch', desc = 'Search actions' },
       { '<leader>w', group = '[W]orkspace', desc = 'Workspace actions' },
       { '<leader>t', group = '[T]oggle', desc = 'Toggle options' },
-      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' }, desc = 'Git hunk actions' },
+      { '<leader>g', group = 'Git [H]unk', mode = { 'n', 'v' }, desc = 'Git hunk actions' },
     },
 
     win = {
