@@ -43,6 +43,7 @@ return {
       python = { 'black', 'isort' },
       c = { 'clang-format' },
       cpp = { 'clang-format' },
+      latex = { 'latexindent' },
     },
   },
 }
