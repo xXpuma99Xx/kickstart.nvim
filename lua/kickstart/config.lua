@@ -124,7 +124,7 @@ vim.keymap.set('v', '<C-l>', extend_linewise_visual_selection, { noremap = true,
 vim.opt.commentstring = '// %s'
 
 vim.keymap.set('n', '<A-j>', ':m .+1<CR>==', { noremap = true, silent = true, desc = 'Move current line down' })
-vim.keymap.set('n', '<A-k>', ':m .-3<CR>==', { noremap = true, silent = true, desc = 'Move current line up' })
+vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', { noremap = true, silent = true, desc = 'Move current line up' })
 
 vim.keymap.set('i', '<A-k>', '<Esc>:m .-2<CR>==gi', { noremap = true, silent = true, desc = 'Move current line up (insert mode)' })
 vim.keymap.set('i', '<A-j>', '<Esc>:m .+1<CR>==gi', { noremap = true, silent = true, desc = 'Move current line down (insert mode)' })
