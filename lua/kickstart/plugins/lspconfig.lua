@@ -117,6 +117,7 @@ return {
       'black',
       'isort',
       'latexindent',
+      'gofumpt',
       -- 'luacheck',
       -- 'markdownlint',
       -- 'pylint',
