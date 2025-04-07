@@ -131,6 +131,3 @@ vim.keymap.set('i', '<A-j>', '<Esc>:m .+1<CR>==gi', { noremap = true, silent = t
 
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = 'Move selected block up' })
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = 'Move selected block down' })
-
-vim.api.nvim_set_keymap('n', '<C-|>', ':vsplit<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-->', ':split<CR>', { noremap = true, silent = true })

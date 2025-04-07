@@ -98,5 +98,21 @@ return {
     vim.keymap.set('n', '<leader>ba', ':BufferLineCloseOthers<CR>', { desc = 'Close other buffers', noremap = true, silent = true })
 
     vim.keymap.set('n', '<leader>bs', bufferline.pick, { noremap = true, silent = true, desc = 'Pick buffer' })
+
+    local function smart_split(split_cmd)
+      return function()
+        local buffers = vim.fn.getbufinfo { buflisted = 1 }
+        local current_buf = vim.api.nvim_get_current_buf()
+
+        if #buffers >= 2 then
+          vim.cmd 'BufferLineCyclePrev'
+        end
+        vim.cmd(split_cmd)
+        vim.api.nvim_set_current_buf(current_buf)
+      end
+    end
+
+    vim.keymap.set('n', '<C-|>', smart_split 'vsplit', { noremap = true, silent = true, desc = 'Smart vertical split' })
+    vim.keymap.set('n', '<C-->', smart_split 'split', { noremap = true, silent = true, desc = 'Smart horizontal split' })
   end,
 }
