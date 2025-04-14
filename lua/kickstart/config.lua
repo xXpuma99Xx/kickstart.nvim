@@ -131,3 +131,9 @@ vim.keymap.set('i', '<A-j>', '<Esc>:m .+1<CR>==gi', { noremap = true, silent = t
 
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = 'Move selected block up' })
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = 'Move selected block down' })
+
+vim.keymap.set('n', '<A-S-j>', ':copy .<CR>', { noremap = true, silent = true, desc = 'Duplicar línea hacia abajo' })
+vim.keymap.set('v', '<A-S-j>', ":'>copy '><CR>gv", { noremap = true, silent = true, desc = 'Duplicar selección hacia abajo' })
+
+vim.keymap.set('n', '<A-S-k>', ':copy .-1<CR>', { noremap = true, silent = true, desc = 'Duplicar línea hacia arriba' })
+vim.keymap.set('v', '<A-S-k>', ":'<copy '<-1<CR>gv", { noremap = true, silent = true, desc = 'Duplicar selección hacia arriba' })

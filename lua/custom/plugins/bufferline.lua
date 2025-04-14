@@ -114,5 +114,33 @@ return {
 
     vim.keymap.set('n', '<C-|>', smart_split 'vsplit', { noremap = true, silent = true, desc = 'Smart vertical split' })
     vim.keymap.set('n', '<C-->', smart_split 'split', { noremap = true, silent = true, desc = 'Smart horizontal split' })
+
+    local function swap_buffers_between_windows()
+      local current_win = vim.api.nvim_get_current_win()
+      local current_buf = vim.api.nvim_get_current_buf()
+      local other_win = nil
+
+      for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+        if win ~= current_win then
+          other_win = win
+          break
+        end
+      end
+
+      if other_win then
+        local other_buf = vim.api.nvim_win_get_buf(other_win)
+        vim.api.nvim_win_set_buf(current_win, other_buf)
+        vim.api.nvim_win_set_buf(other_win, current_buf)
+        vim.api.nvim_set_current_win(other_win)
+      else
+        print 'No hay otra ventana para intercambiar buffers'
+      end
+    end
+
+    vim.keymap.set('n', '<leader>bs', swap_buffers_between_windows, {
+      noremap = true,
+      silent = true,
+      desc = 'Intercambiar buffers entre ventanas',
+    })
   end,
 }
