@@ -80,25 +80,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.keymap.set({ 'n', 'i' }, '<C-s>', function()
-  if vim.bo.modifiable then
-    vim.cmd 'w'
-    print '💾 Archivo guardado!'
-  else
-    print '❌ No se puede guardar este archivo!'
-  end
-end, { desc = 'Guardar archivo', noremap = true, silent = true })
-
 local function save_file()
   if vim.bo.modifiable then
     vim.cmd 'w'
-    print '💾 Archivo guardado!'
+    print '💾 File saved!'
   else
-    print '❌ No se puede guardar este archivo!'
+    print '❌ This file could not be saved!'
   end
 end
 
-vim.keymap.set({ 'n', 'i' }, '<C-s>', save_file, { desc = 'File saved', noremap = true, silent = true })
+vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', save_file, { desc = 'Save file', noremap = true, silent = true })
 
 vim.keymap.set('n', '<C-q>', '<cmd>q<CR>', { desc = 'Close', noremap = true, silent = true })
 
