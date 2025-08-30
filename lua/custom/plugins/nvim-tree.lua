@@ -366,8 +366,8 @@ return {
       },
     }
 
-    vim.keymap.set({ 'n', 'i' }, '<C-b>', api.tree.toggle, { noremap = true, silent = true, nowait = true })
-    vim.keymap.set({ 'n', 'i' }, '<C-M-b>', '<cmd> NvimTreeFocus <CR>', { desc = 'nvim-tree: Focus', noremap = true, silent = true })
+    vim.keymap.set({ 'n', 'i' }, '<D-b>', api.tree.toggle, { noremap = true, silent = true, nowait = true })
+    vim.keymap.set({ 'n', 'i' }, '<D-M-b>', '<cmd> NvimTreeFocus <CR>', { desc = 'nvim-tree: Focus', noremap = true, silent = true })
 
     local close = function()
       if api.tree.is_visible() then
