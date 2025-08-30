@@ -89,15 +89,15 @@ return {
 
     vim.keymap.set('n', '<leader><C-w>', close_buffer, { desc = 'Close current buffer', noremap = true, silent = true })
 
-    vim.keymap.set('n', '<leader>bl', ':BufferLineCycleNext<CR>', { desc = 'Next buffer', noremap = true, silent = true })
-    vim.keymap.set('n', '<leader>bh', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true, desc = 'Previous buffer' })
+    vim.keymap.set('n', '<leader>pl', ':BufferLineCycleNext<CR>', { desc = 'Next buffer', noremap = true, silent = true })
+    vim.keymap.set('n', '<leader>ph', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true, desc = 'Previous buffer' })
 
-    vim.keymap.set('n', '<leader>bml', ':BufferLineMoveNext<CR>', { desc = 'Move buffer next', noremap = true, silent = true })
-    vim.keymap.set('n', '<leader>bmh', ':BufferLineMovePrev<CR>', { desc = 'Move buffer previous', noremap = true, silent = true })
+    vim.keymap.set('n', '<leader>pml', ':BufferLineMoveNext<CR>', { desc = 'Move buffer next', noremap = true, silent = true })
+    vim.keymap.set('n', '<leader>pmh', ':BufferLineMovePrev<CR>', { desc = 'Move buffer previous', noremap = true, silent = true })
 
-    vim.keymap.set('n', '<leader>ba', ':BufferLineCloseOthers<CR>', { desc = 'Close other buffers', noremap = true, silent = true })
+    vim.keymap.set('n', '<leader>pa', ':BufferLineCloseOthers<CR>', { desc = 'Close other buffers', noremap = true, silent = true })
 
-    vim.keymap.set('n', '<leader>bs', bufferline.pick, { noremap = true, silent = true, desc = 'Pick buffer' })
+    vim.keymap.set('n', '<leader>pp', bufferline.pick, { noremap = true, silent = true, desc = 'Pick buffer' })
 
     local function smart_split(split_cmd)
       return function()
@@ -133,14 +133,14 @@ return {
         vim.api.nvim_win_set_buf(other_win, current_buf)
         vim.api.nvim_set_current_win(other_win)
       else
-        print 'No hay otra ventana para intercambiar buffers'
+        print 'There is no other window to swap buffers'
       end
     end
 
-    vim.keymap.set('n', '<leader>bs', swap_buffers_between_windows, {
+    vim.keymap.set('n', '<leader>ps', swap_buffers_between_windows, {
       noremap = true,
       silent = true,
-      desc = 'Intercambiar buffers entre ventanas',
+      desc = 'Switch buffers between windows',
     })
   end,
 }

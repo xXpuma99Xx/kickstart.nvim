@@ -50,6 +50,7 @@ return {
       { '<leader>w', group = '[W]orkspace', desc = 'Workspace actions' },
       { '<leader>t', group = '[T]oggle', desc = 'Toggle options' },
       { '<leader>g', group = 'Git [H]unk', mode = { 'n', 'v' }, desc = 'Git hunk actions' },
+      { '<leader>p', group = 'Bufferline', desc = 'Bufferline options' },
     },
 
     win = {
