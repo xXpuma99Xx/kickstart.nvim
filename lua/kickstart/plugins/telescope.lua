@@ -114,5 +114,66 @@ return {
 
     vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, { desc = '[L]SP [S]ymbols' })
     vim.keymap.set('n', '<leader>lw', builtin.lsp_workspace_symbols, { desc = '[L]SP [W]orkspace Symbols' })
+
+    local function visual_selection()
+      vim.cmd 'noau normal! "vy"'
+      return vim.fn.getreg 'v'
+    end
+
+    local last_search_string = nil
+    local last_global_search_string = nil
+
+    local function vscode_search()
+      local search_string = vim.fn.mode() == 'v' and visual_selection() or last_search_string
+
+      builtin.current_buffer_fuzzy_find {
+        default_text = search_string,
+        layout_strategy = 'horizontal',
+        layout_config = {
+          prompt_position = 'bottom',
+          preview_width = 0.5,
+          width = 0.9,
+          height = 0.8,
+        },
+        winblend = 10,
+        attach_mappings = function(_, map)
+          map('i', '<CR>', function(prompt_bufnr)
+            local input = require('telescope.actions.state').get_current_line()
+
+            last_search_string = input
+            require('telescope.actions').select_default(prompt_bufnr)
+          end)
+          return true
+        end,
+      }
+    end
+
+    local function vscode_global_search()
+      local search_string = vim.fn.mode() == 'v' and visual_selection() or last_global_search_string
+
+      builtin.live_grep {
+        default_text = search_string,
+        layout_strategy = 'horizontal',
+        layout_config = {
+          prompt_position = 'bottom',
+          preview_width = 0.5,
+          width = 0.9,
+          height = 0.8,
+        },
+        winblend = 10,
+        attach_mappings = function(_, map)
+          map('i', '<CR>', function(prompt_bufnr)
+            local input = require('telescope.actions.state').get_current_line()
+
+            last_global_search_string = input
+            require('telescope.actions').select_default(prompt_bufnr)
+          end)
+          return true
+        end,
+      }
+    end
+
+    vim.keymap.set({ 'n', 'v' }, '<D-f>', vscode_search, { desc = 'VS Code search (current buffer)' })
+    vim.keymap.set({ 'n', 'v' }, '<D-S-f>', vscode_global_search, { desc = 'VS Code global search (project)' })
   end,
 }
