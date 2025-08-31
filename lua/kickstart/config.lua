@@ -89,17 +89,15 @@ local function save_file()
   end
 end
 
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', save_file, { desc = 'Save file', noremap = true, silent = true })
+vim.keymap.set({ 'n', 'i', 'v' }, '<D-s>', save_file, { desc = 'Save file', noremap = true, silent = true })
 
 vim.keymap.set('n', '<C-q>', '<cmd>q<CR>', { desc = 'Close', noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<C-z>', 'u', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-z>', '<C-o>u', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<C-z>', 'u', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, '<D-z>', 'u', { noremap = true, silent = true })
+vim.keymap.set('i', '<D-z>', '<C-o>u', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<C-S-z>', '<C-r>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-S-z>', '<C-o><C-r>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<C-S-z>', '<C-r>', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, '<D-S-z>', '<C-r>', { noremap = true, silent = true })
+vim.keymap.set('i', '<D-S-z>', '<C-o><C-r>', { noremap = true, silent = true })
 
 local function extend_linewise_visual_selection()
   if vim.fn.mode() == 'V' then
@@ -109,22 +107,29 @@ local function extend_linewise_visual_selection()
   end
 end
 
-vim.keymap.set('n', '<leader><C-l>', extend_linewise_visual_selection, { noremap = true, silent = true })
-vim.keymap.set('v', '<C-l>', extend_linewise_visual_selection, { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, '<D-l>', extend_linewise_visual_selection, { noremap = true, silent = true })
 
 vim.opt.commentstring = '// %s'
 
-vim.keymap.set('n', '<A-j>', ':m .+1<CR>==', { noremap = true, silent = true, desc = 'Move current line down' })
-vim.keymap.set('n', '<A-k>', ':m .-2<CR>==', { noremap = true, silent = true, desc = 'Move current line up' })
+vim.keymap.set('n', '<M-j>', ':m .+1<CR>==', { noremap = true, silent = true, desc = 'Move current line down' })
+vim.keymap.set('n', '<M-k>', ':m .-2<CR>==', { noremap = true, silent = true, desc = 'Move current line up' })
+vim.keymap.set('n', '<M-h>', '<<', { noremap = true, silent = true, desc = 'Decrease indentation' })
+vim.keymap.set('n', '<M-l>', '>>', { noremap = true, silent = true, desc = 'Increase indentation' })
+vim.keymap.set('n', 'λ', '>>', { noremap = true, silent = true, desc = 'Increase indentation' })
 
-vim.keymap.set('i', '<A-k>', '<Esc>:m .-2<CR>==gi', { noremap = true, silent = true, desc = 'Move current line up (insert mode)' })
-vim.keymap.set('i', '<A-j>', '<Esc>:m .+1<CR>==gi', { noremap = true, silent = true, desc = 'Move current line down (insert mode)' })
+vim.keymap.set('v', '<M-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = 'Move selected block down' })
+vim.keymap.set('v', '<M-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = 'Move selected block up' })
+vim.keymap.set('v', '<M-h>', '<gv', { noremap = true, silent = true, desc = 'Decrease indentation (visual mode)' })
+vim.keymap.set('v', '<M-l>', '>gv', { noremap = true, silent = true, desc = 'Increase indentation (visual mode)' })
+vim.keymap.set('v', 'λ', '>gv', { noremap = true, silent = true, desc = 'Increase indentation (visual mode)' })
 
-vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = 'Move selected block up' })
-vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = 'Move selected block down' })
+vim.keymap.set('i', '<M-j>', '<Esc>:m .+1<CR>==gi', { noremap = true, silent = true, desc = 'Move current line down (insert mode)' })
+vim.keymap.set('i', '<M-k>', '<Esc>:m .-2<CR>==gi', { noremap = true, silent = true, desc = 'Move current line up (insert mode)' })
 
-vim.keymap.set('n', '<A-S-j>', ':copy .<CR>', { noremap = true, silent = true, desc = 'Duplicar línea hacia abajo' })
-vim.keymap.set('v', '<A-S-j>', ":'>copy '><CR>gv", { noremap = true, silent = true, desc = 'Duplicar selección hacia abajo' })
+vim.keymap.set('n', '<M-S-j>', ':copy .<CR>', { noremap = true, silent = true, desc = 'Duplicate line down' })
+vim.keymap.set('n', '<M-S-k>', ':copy .-1<CR>', { noremap = true, silent = true, desc = 'Duplicate line up' })
+vim.keymap.set('n', '', ':copy .-1<CR>', { noremap = true, silent = true, desc = 'Duplicate line up' })
 
-vim.keymap.set('n', '<A-S-k>', ':copy .-1<CR>', { noremap = true, silent = true, desc = 'Duplicar línea hacia arriba' })
-vim.keymap.set('v', '<A-S-k>', ":'<copy '<-1<CR>gv", { noremap = true, silent = true, desc = 'Duplicar selección hacia arriba' })
+vim.keymap.set('v', '<M-S-j>', ":'>copy '><CR>gv", { noremap = true, silent = true, desc = 'Duplicate section down' })
+vim.keymap.set('v', '<M-S-k>', ":'<copy '<-1<CR>gv", { noremap = true, silent = true, desc = 'Duplicate section up' })
+vim.keymap.set('v', '', ":'<copy '<-1<CR>gv", { noremap = true, silent = true, desc = 'Duplicate section up' })
