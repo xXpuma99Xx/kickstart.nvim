@@ -141,6 +141,7 @@ return {
             local input = require('telescope.actions.state').get_current_line()
 
             last_search_string = input
+            vim.fn.setreg('/', input)
             require('telescope.actions').select_default(prompt_bufnr)
           end)
           return true
