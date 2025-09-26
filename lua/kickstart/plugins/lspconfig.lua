@@ -118,6 +118,7 @@ return {
       'isort',
       'latexindent',
       'gofumpt',
+      'rustfmt',
       -- 'luacheck',
       -- 'markdownlint',
       -- 'pylint',

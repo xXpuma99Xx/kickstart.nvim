@@ -45,6 +45,7 @@ return {
       cpp = { 'clang-format' },
       latex = { 'latexindent' },
       go = { 'gofumpt' },
+      rust = { 'rustfmt' },
     },
   },
 }
