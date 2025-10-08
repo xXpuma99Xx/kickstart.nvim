@@ -35,10 +35,10 @@ return {
 
     formatters_by_ft = {
       lua = { 'stylua' },
-      javascript = { 'prettierd', 'prettier', stop_after_first = true },
-      typescript = { 'prettierd', 'prettier', stop_after_first = true },
-      javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
-      typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+      javascript = { 'prettier' },
+      typescript = { 'prettier' },
+      javascriptreact = { 'prettier' },
+      typescriptreact = { 'prettier' },
       java = { 'google-java-format' },
       python = { 'black', 'isort' },
       c = { 'clang-format' },
@@ -46,6 +46,7 @@ return {
       latex = { 'latexindent' },
       go = { 'gofumpt' },
       rust = { 'rustfmt' },
+      markdown = { 'prettierd' },
     },
   },
 }
