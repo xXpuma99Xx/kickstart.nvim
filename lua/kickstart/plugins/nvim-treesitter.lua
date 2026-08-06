@@ -1,11 +1,16 @@
 return {
   'nvim-treesitter/nvim-treesitter',
 
+  branch = 'main',
+  lazy = false,
   build = ':TSUpdate',
-  main = 'nvim-treesitter.configs',
 
-  opts = {
-    ensure_installed = {
+  config = function()
+    local treesitter = require 'nvim-treesitter'
+
+    treesitter.setup {}
+
+    treesitter.install {
       'bash',
       'c',
       'diff',
@@ -39,14 +44,13 @@ return {
       'vue',
       'svelte',
       'graphql',
-      'bash',
-    },
-    auto_install = true,
-    highlight = {
-      enable = true,
-      additional_vim_regex_highlighting = { 'ruby', 'yaml' },
-    },
-    indent = { enable = true, disable = { 'ruby' } },
-    autotag = { enable = true },
-  },
+    }
+
+    vim.api.nvim_create_autocmd('FileType', {
+      group = vim.api.nvim_create_augroup('kickstart-treesitter', { clear = true }),
+      callback = function(args)
+        pcall(vim.treesitter.start, args.buf)
+      end,
+    })
+  end,
 }
