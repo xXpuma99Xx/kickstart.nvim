@@ -14,16 +14,16 @@ return {
         return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
       end
 
-      api.config.mappings.default_on_attach(bufnr)
+      api.map.on_attach.default(bufnr)
       vim.keymap.set('n', 'g?', api.tree.toggle_help, opts 'Help')
       vim.keymap.set('n', '<C-]>', api.tree.change_root_to_node, opts 'CD')
       vim.keymap.set('n', '-', api.tree.change_root_to_parent, opts 'Up')
-      vim.keymap.set('n', 'B', api.tree.toggle_no_buffer_filter, opts 'Toggle Filter: No Buffer')
-      vim.keymap.set('n', 'C', api.tree.toggle_git_clean_filter, opts 'Toggle Filter: Git Clean')
-      vim.keymap.set('n', 'H', api.tree.toggle_hidden_filter, opts 'Toggle Filter: Dotfiles')
-      vim.keymap.set('n', 'I', api.tree.toggle_gitignore_filter, opts 'Toggle Filter: Git Ignore')
-      vim.keymap.set('n', 'M', api.tree.toggle_no_bookmark_filter, opts 'Toggle Filter: No Bookmark')
-      vim.keymap.set('n', 'U', api.tree.toggle_custom_filter, opts 'Toggle Filter: Hidden')
+      vim.keymap.set('n', 'B', api.filter.no_buffer.toggle, opts 'Toggle Filter: No Buffer')
+      vim.keymap.set('n', 'C', api.filter.git.clean.toggle, opts 'Toggle Filter: Git Clean')
+      vim.keymap.set('n', 'H', api.filter.dotfiles.toggle, opts 'Toggle Filter: Dotfiles')
+      vim.keymap.set('n', 'I', api.filter.git.ignored.toggle, opts 'Toggle Filter: Git Ignore')
+      vim.keymap.set('n', 'M', api.filter.no_bookmark.toggle, opts 'Toggle Filter: No Bookmark')
+      vim.keymap.set('n', 'U', api.filter.custom.toggle, opts 'Toggle Filter: Hidden')
       vim.keymap.set('n', 'E', api.tree.expand_all, opts 'Expand All')
       vim.keymap.set('n', 'W', api.tree.collapse_all, opts 'Collapse')
       vim.keymap.set('n', '<C-f>', api.tree.search_node, opts 'Search')
@@ -69,8 +69,8 @@ return {
       vim.keymap.set('n', 'bmv', api.marks.bulk.move, opts 'Move Bookmarked')
       vim.keymap.set('n', 'bd', api.marks.bulk.delete, opts 'Delete Bookmarked')
       vim.keymap.set('n', 'bt', api.marks.bulk.trash, opts 'Trash Bookmarked')
-      vim.keymap.set('n', 'F', api.live_filter.clear, opts 'Live Filter: Clear')
-      vim.keymap.set('n', 'f', api.live_filter.start, opts 'Live Filter: Start')
+      vim.keymap.set('n', 'F', api.filter.live.clear, opts 'Live Filter: Clear')
+      vim.keymap.set('n', 'f', api.filter.live.start, opts 'Live Filter: Start')
       vim.keymap.set('n', '<2-LeftMouse>', api.node.open.edit, opts 'Open')
       vim.keymap.set('n', '<2-RightMouse>', api.tree.change_root_to_node, opts 'CD')
     end
@@ -163,7 +163,10 @@ return {
           hidden_placement = 'after',
           diagnostics_placement = 'signcolumn',
           bookmarks_placement = 'signcolumn',
-          padding = ' ',
+          padding = {
+            icon = ' ',
+            folder_arrow = ' ',
+          },
           symlink_arrow = ' ➛ ',
           show = {
             file = true,
@@ -211,13 +214,10 @@ return {
 
       update_focused_file = {
         enable = true,
-        update_root = true, -- { enable = false, ignore_list = {} }
-        -- exclude = false,
-      },
-
-      system_open = {
-        cmd = '',
-        args = {},
+        update_root = {
+          enable = true,
+          ignore_list = {},
+        },
       },
 
       git = {
