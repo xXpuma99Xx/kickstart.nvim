@@ -100,14 +100,20 @@ vim.keymap.set({ 'n', 'v' }, '<D-S-z>', '<C-r>', { noremap = true, silent = true
 vim.keymap.set('i', '<D-S-z>', '<C-o><C-r>', { noremap = true, silent = true })
 
 local function extend_linewise_visual_selection()
+  local count = vim.v.count1
+
   if vim.fn.mode() == 'V' then
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('j', true, true, true), 'x', false)
+    vim.cmd('normal! ' .. count .. 'j')
   else
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('V', true, true, true), 'n', false)
+    vim.cmd('normal! V' .. (count - 1) .. 'j')
   end
 end
 
-vim.keymap.set({ 'n', 'v' }, '<D-l>', extend_linewise_visual_selection, { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, '<D-l>', extend_linewise_visual_selection, {
+  noremap = true,
+  silent = true,
+  desc = 'Select lines',
+})
 
 vim.opt.commentstring = '// %s'
 
